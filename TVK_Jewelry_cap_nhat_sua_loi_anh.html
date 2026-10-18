@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trần Vũ Khang - Luxury Gold & Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0d0d0d; color: #f3f4f6; }
+    .serif { font-family: 'Playfair Display', serif; }
+    .gold-gradient { background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%); }
+    .gold-text { background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 30%, #b38728 70%, #fbf5b7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .gold-btn { background: linear-gradient(135deg, #bf953f, #aa771c); color: #000; font-weight: 600; transition: all 0.3s ease; }
+    .gold-btn:hover { background: linear-gradient(135deg, #fcf6ba, #bf953f); transform: translateY(-2px); }
+    .vip-card { background: linear-gradient(145deg, #18181b, #09090b); border: 1px solid rgba(191,149,63,0.3); }
+    .product-img { transition: transform 0.4s ease; }
+    .product-card:hover .product-img { transform: scale(1.05); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+  <!-- HEADER & NAVIGATION -->
+  <header class="border-b border-amber-900/40 bg-black/90 sticky top-0 z-50 backdrop-blur-md">
+    <!-- Topbar Bảng giá nhanh -->
+    <div class="bg-gradient-to-r from-amber-950 via-neutral-900 to-amber-950 text-xs py-2 px-4 border-b border-amber-800/30">
+      <div class="max-w-7xl mx-auto flex justify-between items-center overflow-x-auto whitespace-nowrap gap-6 text-amber-200/90">
+        <div><i class="fa-solid fa-chart-line mr-1 text-amber-400"></i> GIÁ VÀNG TRỰC TUYẾN (Ref: TaiEm.com.vn):</div>
+        <div>SJC Mua: <span class="font-bold text-white">13.980.000</span> | Bán: <span class="font-bold text-amber-400">14.330.000</span></div>
+        <div>Vàng 9999 Mua: <span class="font-bold text-white">13.900.000</span> | Bán: <span class="font-bold text-amber-400">14.250.000</span></div>
+        <div>Vàng 18K Mua: <span class="font-bold text-white">9.780.000</span> | Bán: <span class="font-bold text-amber-400">10.330.000</span></div>
+      </div>
+    </div>
+    <!-- Main Navigation -->
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
+        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center font-bold text-black text-xl shadow-[0_0_15px_rgba(191,149,63,0.5)]">TVK</div>
+        <div>
+          <h1 class="serif text-xl font-bold tracking-wider gold-text uppercase">Trần Vũ Khang</h1>
+          <p class="text-[9px] tracking-[0.25em] text-amber-200/60 uppercase">Luxury Gold & Jewelry</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <button onclick="showPage('home')" class="nav-btn hover:text-amber-400 transition text-amber-400" id="nav-home">TRANG CHỦ</button>
+        <button onclick="showPage('products')" class="nav-btn hover:text-amber-400 transition" id="nav-products">BỘ SƯU TẬP</button>
+        <button onclick="showPage('gold-price')" class="nav-btn hover:text-amber-400 transition" id="nav-gold-price">BẢNG GIÁ VÀNG</button>
+        <button onclick="showPage('vip')" class="nav-btn hover:text-amber-400 transition text-amber-300" id="nav-vip"><i class="fa-solid fa-crown mr-1"></i>ĐẶC QUYỀN VIP</button>
+        <button onclick="showPage('custom')" class="nav-btn hover:text-amber-400 transition" id="nav-custom">THIẾT KẾ RIÊNG <span class="bg-amber-500 text-black text-[10px] px-1.5 py-0.5 rounded font-bold ml-1">HOT</span></button>
+        <button onclick="showPage('about')" class="nav-btn hover:text-amber-400 transition" id="nav-about">VỀ CHÚNG TÔI</button>
+      </nav>
+      <div class="flex items-center gap-4">
+        <button onclick="showPage('cart')" class="relative p-2 text-amber-200 hover:text-white">
+          <i class="fa-solid fa-bag-shopping text-xl"></i>
+          <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 bg-amber-500 text-black text-xs font-bold rounded-full flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main id="app-content" class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
+    <!-- PAGE 1: TRANG CHỦ -->
+    <section id="page-home" class="space-y-12">
+      <div class="relative rounded-2xl overflow-hidden border border-amber-500/20 bg-neutral-900 p-8 md:p-16 flex flex-col justify-center items-start min-h-[380px]">
+        <div class="relative z-10 max-w-xl space-y-4">
+          <span class="text-amber-400 text-sm tracking-widest font-semibold uppercase">Tuyệt Tác Trang Sức 2026</span>
+          <h2 class="serif text-4xl md:text-5xl font-bold leading-tight gold-text">Khẳng Định Đẳng Cấp & Thịnh Vượng</h2>
+          <p class="text-gray-300 text-sm md:text-base leading-relaxed">Khám phá các bộ sưu tập kim cương, vàng 24K, 18K được chế tác thủ công tinh xảo với tiêu chuẩn kiểm định nghiêm ngặt.</p>
+          <div class="pt-4 flex gap-4">
+            <button onclick="showPage('products')" class="gold-btn px-6 py-3 rounded-lg shadow-lg">Xem Sản Phẩm</button>
+            <button onclick="showPage('custom')" class="border border-amber-500/50 hover:bg-amber-500/10 px-6 py-3 rounded-lg text-amber-300">Đặt Chế Tác Theo Yêu Cầu</button>
+          </div>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <h3 class="serif text-2xl font-bold text-center gold-text">DANH MỤC TRANG SỨC</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div onclick="filterCategory('nhan')" class="cursor-pointer group p-6 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-amber-500/50 text-center transition">
+            <i class="fa-solid fa-ring text-3xl text-amber-400 mb-3 group-hover:scale-110 transition"></i>
+            <h4 class="font-semibold">Nhẫn Kim Cương & Vàng</h4>
+          </div>
+          <div onclick="filterCategory('daychuyen')" class="cursor-pointer group p-6 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-amber-500/50 text-center transition">
+            <i class="fa-solid fa-gem text-3xl text-amber-400 mb-3 group-hover:scale-110 transition"></i>
+            <h4 class="font-semibold">Dây Chuyền & Mặt Dây</h4>
+          </div>
+          <div onclick="filterCategory('vongtay')" class="cursor-pointer group p-6 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-amber-500/50 text-center transition">
+            <i class="fa-solid fa-circle-notch text-3xl text-amber-400 mb-3 group-hover:scale-110 transition"></i>
+            <h4 class="font-semibold">Vòng & Lắc Tay</h4>
+          </div>
+          <div onclick="filterCategory('vang24k')" class="cursor-pointer group p-6 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-amber-500/50 text-center transition">
+            <i class="fa-solid fa-coins text-3xl text-amber-400 mb-3 group-hover:scale-110 transition"></i>
+            <h4 class="font-semibold">Vàng Miếng & Nhẫn Trơn</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 2: BỘ SƯU TẬP -->
+    <section id="page-products" class="hidden space-y-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-neutral-800 pb-4">
+        <div>
+          <h2 class="serif text-3xl font-bold gold-text">Bộ Sưu Tập Trang Sức</h2>
+          <p class="text-xs text-gray-400 mt-1">Sản phẩm chính hãng – Đầy đủ hóa đơn & Giấy kiểm định</p>
+        </div>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <button onclick="renderProducts('all')" class="cat-filter px-4 py-2 rounded-full bg-amber-500 text-black font-semibold" id="cat-all">Tất cả</button>
+          <button onclick="renderProducts('nhan')" class="cat-filter px-4 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700" id="cat-nhan">Nhẫn</button>
+          <button onclick="renderProducts('daychuyen')" class="cat-filter px-4 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700" id="cat-daychuyen">Dây Chuyền</button>
+          <button onclick="renderProducts('vongtay')" class="cat-filter px-4 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700" id="cat-vongtay">Vòng & Lắc Tay</button>
+          <button onclick="renderProducts('vang24k')" class="cat-filter px-4 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700" id="cat-vang24k">Vàng Tích Trữ 24K</button>
+        </div>
+      </div>
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- JS Render -->
+      </div>
+    </section>
+
+    <!-- PAGE 3: BẢNG GIÁ VÀNG -->
+    <section id="page-gold-price" class="hidden space-y-6">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <h2 class="serif text-3xl font-bold gold-text">Bảng Giá Vàng Niêm Yết Cửa Hàng</h2>
+        <p class="text-xs text-gray-400">Tham khảo biến động tỷ giá thời gian thực từ TaiEm.com.vn (Đơn vị tính: VNĐ / Chỉ)</p>
+      </div>
+      <div class="overflow-x-auto rounded-xl border border-amber-900/40 bg-neutral-900/80">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-amber-950/60 text-amber-300 uppercase text-xs">
+            <tr>
+              <th class="p-4">Loại Vàng / Sản Phẩm</th>
+              <th class="p-4">Giá Mua Vào (VNĐ/Chỉ)</th>
+              <th class="p-4">Giá Bán Ra (VNĐ/Chỉ)</th>
+              <th class="p-4 text-center">Xu Hướng</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-800 text-gray-200">
+            <tr class="hover:bg-neutral-800/40">
+              <td class="p-4 font-semibold text-amber-400">Vàng Miếng SJC (1 Lượng - 10 Lượng)</td>
+              <td class="p-4 font-semibold">13.980.000</td>
+              <td class="p-4 font-semibold text-amber-300">14.330.000</td>
+              <td class="p-4 text-center"><span class="text-green-400 text-xs"><i class="fa-solid fa-arrow-trend-up"></i> +50.000</span></td>
+            </tr>
+            <tr class="hover:bg-neutral-800/40">
+              <td class="p-4 font-semibold text-amber-400">Vàng Nhẫn Trơn TVK 24K (999.9)</td>
+              <td class="p-4 font-semibold">13.900.000</td>
+              <td class="p-4 font-semibold text-amber-300">14.250.000</td>
+              <td class="p-4 text-center"><span class="text-green-400 text-xs"><i class="fa-solid fa-arrow-trend-up"></i> +30.000</span></td>
+            </tr>
+            <tr class="hover:bg-neutral-800/40">
+              <td class="p-4 font-medium">Vàng Nguyên Liệu 99.9% (24K)</td>
+              <td class="p-4">13.800.000</td>
+              <td class="p-4">14.150.000</td>
+              <td class="p-4 text-center"><span class="text-gray-400 text-xs">Ổn định</span></td>
+            </tr>
+            <tr class="hover:bg-neutral-800/40">
+              <td class="p-4 font-medium">Vàng Trang Sức 18K (750 - Vàng Ý)</td>
+              <td class="p-4">9.780.000</td>
+              <td class="p-4">10.330.000</td>
+              <td class="p-4 text-center"><span class="text-gray-400 text-xs">Ổn định</span></td>
+            </tr>
+            <tr class="hover:bg-neutral-800/40">
+              <td class="p-4 font-medium">Vàng Nữ Trang 14K (585)</td>
+              <td class="p-4">7.520.000</td>
+              <td class="p-4">8.020.000</td>
+              <td class="p-4 text-center"><span class="text-gray-400 text-xs">Ổn định</span></td>
+            </tr>
+            <tr class="hover:bg-neutral-800/40">
+              <td class="p-4 font-medium">Vàng Nữ Trang 10K (416)</td>
+              <td class="p-4">5.200.000</td>
+              <td class="p-4">5.700.000</td>
+              <td class="p-4 text-center"><span class="text-gray-400 text-xs">Ổn định</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-gray-500 italic">* Lưu ý: Giá vàng mang tính chất tham khảo tại thời điểm niêm yết và có thể thay đổi nhẹ tùy thuộc vào trọng lượng thực tế và tiền công chế tác của từng mẫu trang sức.</p>
+    </section>
+
+    <!-- PAGE 4: VIP -->
+    <section id="page-vip" class="hidden space-y-8 max-w-5xl mx-auto">
+      <div class="text-center space-y-2">
+        <span class="text-amber-400 text-xs font-bold uppercase tracking-widest"><i class="fa-solid fa-crown mr-1"></i> TVK Loyalty Program</span>
+        <h2 class="serif text-3xl font-bold gold-text">Đặc Quyền Thành Viên VIP</h2>
+        <p class="text-xs text-gray-400">Tri ân khách hàng thân thiết với nhiều ưu đãi độc quyền vượt trội</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="vip-card p-6 rounded-2xl space-y-4 relative overflow-hidden">
+          <div class="flex justify-between items-center">
+            <h3 class="serif text-xl font-bold text-amber-400">VIP GOLD</h3>
+            <i class="fa-solid fa-award text-2xl text-amber-500"></i>
+          </div>
+          <p class="text-[11px] text-gray-400">Tích lũy từ <span class="text-white font-bold">50 - 200 Triệu</span></p>
+          <ul class="text-xs space-y-2 text-gray-300 border-t border-neutral-800 pt-3">
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Giảm <span class="text-amber-300 font-bold">10%</span> tiền công chế tác trang sức.</li>
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Giảm <span class="text-amber-300 font-bold">3%</span> giá trang sức đá quý.</li>
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Quà tặng sinh nhật trị giá 1.000.000 VNĐ.</li>
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Bảo hành làm sáng miễn phí trọn đời.</li>
+          </ul>
+        </div>
+        <div class="vip-card p-6 rounded-2xl space-y-4 relative overflow-hidden border-amber-400 shadow-[0_0_20px_rgba(191,149,63,0.15)]">
+          <div class="flex justify-between items-center">
+            <h3 class="serif text-xl font-bold gold-text">VIP PLATINUM</h3>
+            <i class="fa-solid fa-crown text-2xl text-amber-300"></i>
+          </div>
+          <p class="text-[11px] text-gray-400">Tích lũy từ <span class="text-white font-bold">200 - 500 Triệu</span></p>
+          <ul class="text-xs space-y-2 text-gray-300 border-t border-neutral-800 pt-3">
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Giảm <span class="text-amber-300 font-bold">20%</span> tiền công chế tác trang sức.</li>
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Giảm <span class="text-amber-300 font-bold">5%</span> kim cương & đá quý.</li>
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Quà sinh nhật trị giá 3.000.000 VNĐ.</li>
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Ưu tiên thu đổi trợ giá thêm +0.5% giá vàng.</li>
+          </ul>
+        </div>
+        <div class="vip-card p-6 rounded-2xl space-y-4 relative overflow-hidden bg-gradient-to-b from-neutral-900 via-neutral-950 to-black">
+          <div class="flex justify-between items-center">
+            <h3 class="serif text-xl font-bold text-cyan-300">VIP DIAMOND</h3>
+            <i class="fa-solid fa-gem text-2xl text-cyan-400"></i>
+          </div>
+          <p class="text-[11px] text-gray-400">Tích lũy trên <span class="text-white font-bold">500 Triệu</span></p>
+          <ul class="text-xs space-y-2 text-gray-300 border-t border-neutral-800 pt-3">
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Giảm <span class="text-amber-300 font-bold">30%</span> tiền công chế tác.</li>
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Giảm <span class="text-amber-300 font-bold">8%</span> ổ kim cương & đá quý.</li>
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Miễn phí thiết kế bản vẽ 3D cá nhân hóa.</li>
+            <li><i class="fa-solid fa-check text-amber-400 mr-2"></i>Dịch vụ giao nhận & bảo vệ tận nhà riêng.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 5: THIẾT KẾ RIÊNG -->
+    <section id="page-custom" class="hidden space-y-8 max-w-3xl mx-auto">
+      <div class="text-center space-y-2">
+        <span class="text-amber-400 text-xs uppercase font-bold tracking-widest">Dịch Vụ Cá Nhân Hóa</span>
+        <h2 class="serif text-3xl font-bold gold-text">Đặt Thiết Kế Trang Sức Theo Yêu Cầu</h2>
+        <p class="text-gray-400 text-xs">Biến ý tưởng của bạn thành kiệt tác duy nhất dưới bàn tay thợ kim hoàn Trần Vũ Khang.</p>
+      </div>
+      <form onsubmit="submitCustomOrder(event)" class="bg-neutral-900 p-6 md:p-8 rounded-2xl border border-amber-500/30 space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-medium text-amber-200 mb-1">Họ & Tên *</label>
+            <input type="text" required class="w-full bg-neutral-800 border border-neutral-700 rounded-lg p-3 text-sm focus:border-amber-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-amber-200 mb-1">Số Điện Thoại / Zalo *</label>
+            <input type="tel" required class="w-full bg-neutral-800 border border-neutral-700 rounded-lg p-3 text-sm focus:border-amber-500 outline-none">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-medium text-amber-200 mb-1">Loại Chất Liệu Mong Muốn</label>
+            <select class="w-full bg-neutral-800 border border-neutral-700 rounded-lg p-3 text-sm focus:border-amber-500 outline-none text-gray-200">
+              <option>Vàng 24K (9999)</option>
+              <option>Vàng Ý 18K (750)</option>
+              <option>Vàng Trắng 14K</option>
+              <option>Bạch Kim (Platin)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-amber-200 mb-1">Ngân Sách Dự Kiến (VNĐ)</label>
+            <select class="w-full bg-neutral-800 border border-neutral-700 rounded-lg p-3 text-sm focus:border-amber-500 outline-none text-gray-200">
+              <option>Từ 10 - 30 triệu</option>
+              <option>Từ 30 - 70 triệu</option>
+              <option>Trên 100 triệu</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-amber-200 mb-1">Mô Tả Ý Tưởng / Kích Thước (Size tay)</label>
+          <textarea rows="4" placeholder="Nhập chi tiết yêu cầu, loại đá gắn kèm hoặc khắc tên..." class="w-full bg-neutral-800 border border-neutral-700 rounded-lg p-3 text-sm focus:border-amber-500 outline-none"></textarea>
+        </div>
+        <button type="submit" class="w-full gold-btn py-3 rounded-lg uppercase tracking-wider font-bold">Gửi Yêu Cầu Tư Vấn 3D</button>
+      </form>
+    </section>
+
+    <!-- PAGE 6: VỀ CHÚNG TÔI -->
+    <section id="page-about" class="hidden space-y-6 max-w-4xl mx-auto">
+      <div class="text-center space-y-2">
+        <h2 class="serif text-3xl font-bold gold-text">Về Thương Hiệu Trần Vũ Khang</h2>
+        <p class="text-amber-200/70 text-sm">Tôn vinh giá trị thực - Giữ trọn niềm tin</p>
+      </div>
+      <div class="bg-neutral-900 p-8 rounded-2xl border border-neutral-800 space-y-4 text-gray-300 text-sm leading-relaxed">
+        <p>Thành lập với sứ mệnh mang đến những sản phẩm trang sức vàng và kim cương tinh xảo nhất, <strong>Trần Vũ Khang</strong> không ngừng sáng tạo để khẳng định phong cách riêng cho từng khách hàng.</p>
+        <p>Chúng tôi cam kết 100% sản phẩm có đầy đủ giấy chứng nhận chuẩn tuổi vàng, chính sách thu đổi minh bạch theo giá thị trường niêm yết và dịch vụ bảo hành làm sáng miễn phí trọn đời.</p>
+      </div>
+    </section>
+
+    <!-- PAGE 7: GIỎ HÀNG -->
+    <section id="page-cart" class="hidden space-y-6 max-w-2xl mx-auto">
+      <h2 class="serif text-2xl font-bold gold-text border-b border-neutral-800 pb-3">Giỏ Hàng Của Bạn</h2>
+      <div id="cart-items" class="space-y-4">
+        <p class="text-gray-400 text-sm text-center py-8">Giỏ hàng đang trống.</p>
+      </div>
+      <div id="cart-summary" class="hidden border-t border-neutral-800 pt-4 flex justify-between items-center">
+        <div>Tổng tiền: <span id="cart-total" class="text-xl font-bold text-amber-400">0 VNĐ</span></div>
+        <button onclick="alert('Cảm ơn bạn! Yêu cầu đặt hàng đã được gửi tới tiệm Trần Vũ Khang.')" class="gold-btn px-6 py-2 rounded-lg">Thanh Toán</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black border-t border-amber-900/40 text-xs text-gray-400 py-8 px-4 mt-12">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h4 class="serif font-bold text-white text-base mb-2 gold-text">TRẦN VŨ KHANG JEWELRY</h4>
+        <p>Địa chỉ: TP. Hồ Chí Minh</p>
+        <p>Hotline: 0123 456 789</p>
+        <p>Email: anhhuycuden@gmail.com</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-amber-300 uppercase mb-2">Chính Sách & Bảo Hành</h4>
+        <ul class="space-y-1">
+          <li>• Chính sách thu đổi vàng & kim cương</li>
+          <li>• Bảo hành & Làm sạch trọn đời</li>
+          <li>• Hướng dẫn đo size nhẫn chuẩn</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-amber-300 uppercase mb-2">Thanh Toán An Toàn</h4>
+        <p>Hỗ trợ Tiền mặt, Chuyển khoản QR, Quẹt thẻ Visa/Mastercard.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tạo ảnh SVG ngay trong file HTML để không phụ thuộc dịch vụ ảnh bên ngoài.
+    function makeJewelryImage(category, productName) {
+      const safeName = String(productName).replace(/[&<>"']/g, '');
+      let jewelry = '';
+      if (category === 'nhan') {
+        jewelry = `<ellipse cx="300" cy="330" rx="125" ry="90" fill="none" stroke="url(#gold)" stroke-width="35"/><ellipse cx="300" cy="330" rx="91" ry="60" fill="#171717" stroke="#f8d979" stroke-width="5"/><path d="M275 225 L300 185 L325 225 L300 255 Z" fill="#f8fafc" stroke="#d4af37" stroke-width="8"/><path d="M300 185 L300 255 M275 225 L325 225" stroke="#d4af37" stroke-width="4"/>`;
+      } else if (category === 'daychuyen') {
+        jewelry = `<path d="M145 130 C160 360 440 360 455 130" fill="none" stroke="url(#gold)" stroke-width="15" stroke-linecap="round"/><path d="M300 290 L350 345 L300 420 L250 345 Z" fill="url(#gold)" stroke="#f8d979" stroke-width="5"/><path d="M300 310 L329 345 L300 390 L271 345 Z" fill="#f8fafc" stroke="#d4af37" stroke-width="4"/>`;
+      } else if (category === 'vongtay') {
+        jewelry = `<ellipse cx="300" cy="300" rx="155" ry="130" fill="none" stroke="url(#gold)" stroke-width="32"/><ellipse cx="300" cy="300" rx="124" ry="100" fill="none" stroke="#f8d979" stroke-width="5"/><circle cx="300" cy="168" r="22" fill="#f8fafc" stroke="#d4af37" stroke-width="8"/><circle cx="420" cy="350" r="15" fill="#f8d979"/>`;
+      } else {
+        jewelry = `<rect x="155" y="205" width="290" height="190" rx="18" fill="url(#gold)" stroke="#f8d979" stroke-width="7"/><rect x="180" y="230" width="240" height="140" rx="10" fill="none" stroke="#fff0b0" stroke-width="5"/><text x="300" y="290" text-anchor="middle" fill="#49320b" font-size="26" font-weight="700">24K</text><text x="300" y="330" text-anchor="middle" fill="#49320b" font-size="18">999.9 GOLD</text>`;
+      }
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#28231a"/><stop offset="1" stop-color="#090909"/></linearGradient><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0a8"/><stop offset=".35" stop-color="#d4af37"/><stop offset=".7" stop-color="#8b6418"/><stop offset="1" stop-color="#f8d979"/></linearGradient></defs><rect width="600" height="600" fill="url(#bg)"/><circle cx="300" cy="280" r="205" fill="#d4af37" opacity=".06"/>${jewelry}<path d="M60 475 H540" stroke="#d4af37" stroke-opacity=".5"/><text x="300" y="515" text-anchor="middle" fill="#f8d979" font-family="Arial,sans-serif" font-size="19" letter-spacing="4">TVK JEWELRY</text><text x="300" y="550" text-anchor="middle" fill="#f3f0e8" font-family="Arial,sans-serif" font-size="14">${safeName.slice(0,42)}</text></svg>`;
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+    }
+
+    // Danh sách sản phẩm; ảnh minh họa được nhúng trực tiếp trong HTML
+    const products = [
+      { id: 1, category: 'nhan', name: 'Nhẫn Kim Cương Nam Vương TVK', price: 45500000, image: makeJewelryImage('nhan', 'Nhẫn Kim Cương Nam Vương TVK') },
+      { id: 2, category: 'daychuyen', name: 'Dây Chuyền Vàng Ý 750 Hoàng Gia', price: 18200000, image: makeJewelryImage('daychuyen', 'Dây Chuyền Vàng Ý 750 Hoàng Gia') },
+      { id: 3, category: 'vang24k', name: 'Nhẫn Trơn Vàng 24K Tích Trữ (1 Chỉ)', price: 14250000, image: makeJewelryImage('vang24k', 'Nhẫn Trơn Vàng 24K Tích Trữ (1 Chỉ)') },
+      { id: 4, category: 'nhan', name: 'Nhẫn Nữ Vàng Trắng Gắn Đá Sapphire', price: 22000000, image: makeJewelryImage('nhan', 'Nhẫn Nữ Vàng Trắng Gắn Đá Sapphire') },
+      { id: 5, category: 'daychuyen', name: 'Dây Chuyền Vàng 24K Mặt Rồng', price: 28500000, image: makeJewelryImage('daychuyen', 'Dây Chuyền Vàng 24K Mặt Rồng') },
+      { id: 6, category: 'nhan', name: 'Nhẫn Cưới Đôi Vàng 18K', price: 16800000, image: makeJewelryImage('nhan', 'Nhẫn Cưới Đôi Vàng 18K') },
+      { id: 7, category: 'vang24k', name: 'Nhẫn Trơn Vàng 24K Bản To (2 Chỉ)', price: 28500000, image: makeJewelryImage('vang24k', 'Nhẫn Trơn Vàng 24K Bản To (2 Chỉ)') },
+      { id: 8, category: 'nhan', name: 'Nhẫn Nam Vàng Trắng Kim Cương', price: 38500000, image: makeJewelryImage('nhan', 'Nhẫn Nam Vàng Trắng Kim Cương') },
+      { id: 9, category: 'vongtay', name: 'Lắc Tay Vàng 18K Thanh Lịch', price: 12900000, image: makeJewelryImage('vongtay', 'Lắc Tay Vàng 18K Thanh Lịch') },
+      { id: 10, category: 'vongtay', name: 'Vòng Tay Vàng Trắng Đính Đá', price: 24500000, image: makeJewelryImage('vongtay', 'Vòng Tay Vàng Trắng Đính Đá') },
+      { id: 11, category: 'daychuyen', name: 'Dây Chuyền Bạc Ý Mặt Trái Tim', price: 3200000, image: makeJewelryImage('daychuyen', 'Dây Chuyền Bạc Ý Mặt Trái Tim') },
+      { id: 12, category: 'nhan', name: 'Nhẫn Nữ Vàng Hồng Đính Đá', price: 11900000, image: makeJewelryImage('nhan', 'Nhẫn Nữ Vàng Hồng Đính Đá') },
+      { id: 13, category: 'vang24k', name: 'Nhẫn Vàng 24K Tài Lộc (2 Chỉ)', price: 28500000, image: makeJewelryImage('vang24k', 'Nhẫn Vàng 24K Tài Lộc (2 Chỉ)') },
+      { id: 14, category: 'vongtay', name: 'Vòng Cẩm Thạch Bọc Vàng', price: 8900000, image: makeJewelryImage('vongtay', 'Vòng Cẩm Thạch Bọc Vàng') },
+      { id: 15, category: 'daychuyen', name: 'Mặt Dây Chuyền Kim Cương Solitaire', price: 31500000, image: makeJewelryImage('daychuyen', 'Mặt Dây Chuyền Kim Cương Solitaire') },
+      { id: 16, category: 'nhan', name: 'Nhẫn Signet Nam Vàng 18K', price: 19500000, image: makeJewelryImage('nhan', 'Nhẫn Signet Nam Vàng 18K') },
+      { id: 17, category: 'daychuyen', name: 'Dây Chuyền Ngọc Trai Thanh Nhã', price: 7600000, image: makeJewelryImage('daychuyen', 'Dây Chuyền Ngọc Trai Thanh Nhã') },
+      { id: 18, category: 'vongtay', name: 'Lắc Tay Charm Vàng 14K', price: 9800000, image: makeJewelryImage('vongtay', 'Lắc Tay Charm Vàng 14K') }
+    ];
+
+    let cart = [];
+
+    function showPage(pageId) {
+      const pages = ['home', 'products', 'gold-price', 'vip', 'custom', 'about', 'cart'];
+      pages.forEach(id => {
+        document.getElementById(`page-${id}`).classList.add('hidden');
+      });
+      document.getElementById(`page-${pageId}`).classList.remove('hidden');
+
+      // Highlight menu
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('text-amber-400'));
+      const navBtn = document.getElementById(`nav-${pageId}`);
+      if (navBtn) navBtn.classList.add('text-amber-400');
+
+      if (pageId === 'products') renderProducts('all');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderProducts(cat) {
+      const grid = document.getElementById('product-grid');
+      const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
+
+      // Cập nhật trạng thái nút filter
+      document.querySelectorAll('.cat-filter').forEach(btn => {
+        btn.classList.remove('bg-amber-500', 'text-black', 'font-semibold');
+        btn.classList.add('bg-neutral-800');
+      });
+      const activeBtn = document.getElementById(`cat-${cat}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-neutral-800');
+        activeBtn.classList.add('bg-amber-500', 'text-black', 'font-semibold');
+      }
+
+      grid.innerHTML = filtered.map(p => `
+        <div class="product-card bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-amber-500/50 transition group flex flex-col">
+          <div class="relative overflow-hidden aspect-square bg-neutral-800">
+            <img src="${p.image}" 
+                 alt="${p.name}" 
+                 class="product-img w-full h-full object-cover"
+                 loading="lazy"
+                 >
+          </div>
+          <div class="p-5 flex flex-col flex-grow justify-between">
+            <div class="space-y-2">
+              <h4 class="font-semibold text-sm text-gray-200 leading-snug">${p.name}</h4>
+              <p class="text-amber-400 font-bold text-lg">${p.price.toLocaleString('vi-VN')} VNĐ</p>
+            </div>
+            <button onclick="addToCart(${p.id})" 
+                    class="w-full mt-4 border border-amber-500/50 hover:bg-amber-500 hover:text-black py-2.5 rounded-lg text-xs font-semibold text-amber-300 transition">
+              Thêm Vào Giỏ
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterCategory(cat) {
+      showPage('products');
+      setTimeout(() => renderProducts(cat), 50);
+    }
+
+    function addToCart(prodId) {
+      const item = products.find(p => p.id === prodId);
+      if (!item) return;
+      cart.push(item);
+      document.getElementById('cart-count').innerText = cart.length;
+      alert(`Đã thêm "${item.name}" vào giỏ hàng!`);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const cartItems = document.getElementById('cart-items');
+      const cartSummary = document.getElementById('cart-summary');
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-gray-400 text-sm text-center py-8">Giỏ hàng đang trống.</p>';
+        cartSummary.classList.add('hidden');
+        return;
+      }
+
+      cartSummary.classList.remove('hidden');
+      let total = 0;
+      cartItems.innerHTML = cart.map((item, idx) => {
+        total += item.price;
+        return `
+          <div class="flex gap-4 items-center bg-neutral-900 p-4 rounded-lg border border-neutral-800">
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+            <div class="flex-grow">
+              <p class="font-semibold text-sm">${item.name}</p>
+              <p class="text-xs text-amber-400">${item.price.toLocaleString('vi-VN')} VNĐ</p>
+            </div>
+            <button onclick="removeFromCart(${idx})" class="text-red-400 text-xs hover:underline">Xóa</button>
+          </div>
+        `;
+      }).join('');
+      document.getElementById('cart-total').innerText = total.toLocaleString('vi-VN') + ' VNĐ';
+    }
+
+    function removeFromCart(idx) {
+      cart.splice(idx, 1);
+      document.getElementById('cart-count').innerText = cart.length;
+      updateCartUI();
+    }
+
+    function submitCustomOrder(e) {
+      e.preventDefault();
+      alert('Đã nhận thông tin thiết kế! Đội ngũ Trần Vũ Khang sẽ liên hệ Zalo tư vấn bản vẽ 3D cho bạn trong 15 phút.');
+    }
+
+    // Khởi tạo
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts('all');
+    });
+  </script>
+</body>
+</html>
